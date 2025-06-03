@@ -17,41 +17,77 @@ Dokumentasi proses recovery RAID 5 pada NAS Synology milik kantor, dilakukan sec
 
 ## ⚠️ Gejala
 
-- Volume masih dapat diakses tapi muncul warning: `Storage Pool 1 - Degraded`
-- Backup segera dilakukan ke storage eksternal
-- Proses rebuild RAID gagal meskipun sudah ganti HDD
+- Volume masih bisa diakses → segera backup
+- Status: `Storage Pool 1 - Degraded`
+- Gagal rebuild meskipun disk sudah diganti
 
 ![RAID degraded](screenshots/raid-degraded.png)
 
 ---
 
-## 🔍 Diagnosis
+## 🛠️ Langkah-Langkah Detail
 
-- HDD #3 menunjukkan sektor rusak parah (SMART di bawah ambang)
-- HDD #1 juga terdeteksi mulai menurun (SMART Health: 87%)
-- Proses `repair` via antarmuka Synology dan `putty` gagal
-- Kemungkinan: RAID tidak bisa rebuild karena dua disk dalam kondisi meragukan
+### 1. **Backup Data**
+
+```bash
+Login ke File Station atau gunakan rsync/scp:
+
+- Buat backup seluruh folder penting ke USB HDD
+- Backup juga permission:
+  - permissions_backup.txt
+  - file .dss dari setiap folder (jika menggunakan ACL)
+```
 
 ---
 
-## 🔄 Solusi yang Diterapkan
+### 2. **Diagnosa Disk**
 
-1. Backup seluruh folder dan file `.dss` (security folder metadata) dan `permissions_backup.txt`
-2. Lepaskan disk #3, pasang HDD baru dengan ukuran ≥ disk sebelumnya
-3. Mencoba rebuild → gagal
-4. Membuat ulang RAID 5 dari awal menggunakan:
-   - 2 HDD lama (SMART 100%)
-   - 1 HDD baru
-5. Restore semua data dan user permission secara manual
+- Masuk ke `Storage Manager > HDD/SSD`
+- Cek SMART:
+  - Disk 3 = Bad sector berat (degraded)
+  - Disk 1 = Health 87% (berisiko)
+- Catat ukuran semua disk (untuk penggantian nanti)
+
+---
+
+### 3. **Percobaan Rebuild (Gagal)**
+
+- Ganti disk 3 → masuk Storage Manager → pilih “Repair”
+- Proses tetap gagal → diduga karena:
+  - Disk 1 juga sudah mulai rusak
+  - RAID 5 hanya toleran terhadap 1 disk failure
+
+---
+
+### 4. **Solusi Akhir: Build Ulang RAID**
+
+#### a. Hapus Storage Pool
+- Masuk ke `Storage Pool > Action > Remove`
+
+#### b. Buat RAID Baru
+- Gunakan:
+  - Disk 1 (lama) – SMART 100%
+  - Disk 2 (lama) – SMART 100%
+  - Disk 3 (baru)
+- Pilih RAID 5 saat pembuatan pool
+
+#### c. Buat Volume & Share Folder
+
+---
+
+### 5. **Restore Data & Permission**
+
+- Salin semua data dari backup eksternal ke share folder baru
+- Restore file `.dss` dan `permissions_backup.txt` jika digunakan
+- Setting ulang permission folder (bisa lewat File Station atau Control Panel)
 
 ---
 
 ## ✅ Hasil Akhir
 
-- RAID 5 berhasil dibuat ulang dengan 3 disk sehat
-- Data ±4TB berhasil dikembalikan dari backup
-- Permission user dan struktur folder direstore
-- Volume dan storage pool kembali `Healthy`
+- RAID 5 berhasil dibuat ulang dengan disk sehat
+- Data ±4TB berhasil direstore
+- Semua share folder dan permission berfungsi kembali
 
 ![RAID healthy](screenshots/raid-recovered.png)
 
@@ -60,13 +96,13 @@ Dokumentasi proses recovery RAID 5 pada NAS Synology milik kantor, dilakukan sec
 ## 📁 Tips Dokumentasi
 
 - Simpan hasil backup permission dan struktur folder di tempat terpisah
-- Lakukan `Data Scrubbing` secara berkala di Synology (lihat tab)
-- Pantau SMART status HDD secara rutin (gunakan email notifikasi jika tersedia)
+- Lakukan `Data Scrubbing` rutin di Synology
+- Aktifkan email notifikasi untuk alert disk failure
 
 ---
 
 ## 🧠 Pembelajaran
 
-- **RAID 5 bukan backup** — tetap butuh backup harian/mingguan ke device eksternal
-- Disk yang "masih bisa diakses" belum tentu aman untuk rebuild
-- Proses manual bisa jadi lebih aman daripada memaksa sistem melakukan restore otomatis
+- RAID ≠ Backup. Tetap harus ada backup eksternal
+- Rebuild hanya mungkin jika disk lain benar-benar sehat
+- Dokumentasi sangat penting untuk disaster recovery
