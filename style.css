@@ -1,0 +1,264 @@
+body {
+  width: 1200px;
+    margin: 0 auto;
+    font-family: italic;
+    background-color: #ace8b4
+  }
+    .baratas img {
+        background-color: #f4e22a ;
+        padding: 5px;
+        border-radius: 50%;
+        float: left;
+        width: 100px;
+        height: 100px;
+    }
+    .baratas ul {
+        font-weight: bold;
+        font-size: 30px;
+        list-style-type: none;
+        margin: 0;
+        padding: 10px;
+        overflow: hidden;
+        background-color:#008080;
+    }
+    .baratas li {
+        float: right;
+    }
+    .baratas li a {
+        display: block;
+        color: black;
+        text-align: center;
+        padding: 10px 12px;
+        text-decoration: none;
+    }
+    .baratas li a:hover {
+        background-color:#ace8b4;
+    }
+
+  .deskrip {
+    background: url('bg.png');
+    padding: 0;
+    padding-top: 0;
+    padding-bottom: 450px;
+
+    margin-top: 0;
+    text-align: center;
+
+}
+  .deskrip h1 {
+    font-size: 75px;
+    font-family:   'Orbitron', sans-serif;
+    margin: 0 auto;
+}
+  .deskrip p {
+    font-weight: bold;
+    font-size: 40px;
+    font-family: 'Fira Code', monospace;
+    margin-top: : 500px;
+}
+@media(max-width: 600px)
+{
+
+  .deskrip h1 {
+        font-size: 22.5px;
+    }
+  .deskrip p {
+        font-size: 10px;
+    }
+}
+.pembuka {
+    font-weight: bold;
+    line-height: 2;
+    text-align: center;
+    margin-top: 30px;
+}
+.pembuka img {
+    background-color: #f4e22a;
+    padding: 5px;
+    border-radius: 100%;
+    width: 350px;
+    height: 350px;
+}
+.pembuka h2 {
+    margin: 0;
+    font-size: 60px;
+    font-family: cursive;
+    font-weight: bolder;
+}
+.pembuka p {
+    width: 50%;
+    margin: 0 auto;
+}
+@media(max-width: 635px)
+{
+    .pembuka {
+        line-height: 2;
+        margin-top: 10px;
+    }
+    .pembuka img {
+        padding: 4px;
+        width: 80px;
+        height: 80px;
+    }
+    .pembuka h2 {
+        margin: 0;
+        font-size: 20px;
+    }
+    .pembuka p {
+        width: 60%;
+        margin: 0 auto;
+        font-size: 7px;
+    }
+}
+.riwayat {
+    font-weight: bold;
+    line-height: 2;
+    width: 75%;
+    margin: 0 auto;
+    text-align: center;
+}
+.riwayat h2 {
+    font-family:  'Fira Code', monospace;
+    font-weight: bolder;
+    font-size: 60px;
+    margin-top: 100px;
+    margin-bottom: 0;
+}
+.riwayat img {
+    background-color:  #f4e22a;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    padding: 5px;
+    display: inline-block;
+}
+.riwayat h3 {
+    margin: 60px 0 0 0;
+    font-family: 'Podkova', serif;
+    font-size: 30px;
+}
+.riwayat p {
+    font-family: 'Lemonada', cursive;
+    margin: 20px 0 0 0;
+}
+.pendidikan {
+    text-align: left;
+    margin: 70px auto 120px auto;
+}
+.pendidikan img {
+    margin-right: 50px;
+    float: left;
+}
+.organisasi {
+    text-align: left;
+    margin: 120px auto;
+}
+.organisasi img {
+    margin-left: 50px;
+    float: right;
+}
+.keahlian {
+    text-align: left;
+    margin: 120px auto;
+}
+.keahlian img {
+    margin-right: 50px;
+    float: left;
+}
+@media(max-width: 635px) {
+    .riwayat {
+        margin-bottom: 35px;
+        width: 80%;
+        line-height: 1.5;
+    }
+    .riwayat h2 {
+
+        font-size: 20px;
+        margin-top: 30px;
+    }
+    .riwayat img {
+        padding: 2px;
+        width: 60px;
+        height: 60px;
+
+    }
+    .riwayat h3 {
+
+        font-size: 10px;
+        margin: 7px 0 0 0;
+    }
+    .riwayat p {
+        font-size: 6px;
+        margin: 4px 0 0 0;
+    }.pendidikan {
+        margin: 16px auto 20px auto;
+    }
+    .pendidikan img {
+        margin-right: 10px;
+    }
+    .organisasi {
+        margin: 20px auto;
+    }
+    .organisasi img {
+        margin-left: 10px;
+    }
+    .keahlian {
+        margin: 20px auto;
+    }
+    .keahlian img {
+        margin-right: 10px;
+    }
+}
+footer {
+    text-align: center;
+    background-color: #008080;
+    padding: 30px;
+}
+footer a{
+    text-decoration: none;
+}
+.barbawah {
+    margin-bottom: 15px;
+}
+.barbawah a {
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    font-size: 17px;
+    margin: 8px 5px;
+}
+.barbawah a:hover {
+    background-color: #ace8b4;
+}
+.sosmed a {
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    font-size: 17px;
+    margin: 8px 10px;
+}
+.sosmed a:hover {
+    background-color: #ace8b4;
+}
+@media(max-width: 635px)
+{
+    footer {
+        padding: 10px;
+    }
+    footer a{
+        text-decoration: none;
+    }
+    .barbawah {
+        margin-bottom: 8px;
+    }
+    .barbawah a {
+        padding: 3px;
+        font-size: 7px;
+        margin: 0 1px;
+    }
+    .sosmed a {
+        padding: 3px;
+        font-size: 7px;
+        margin: 0 3px;
+    }
+}
